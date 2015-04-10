@@ -3,8 +3,11 @@
 <html>
   <head>
     <title>Labb 2</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
 
     <!-- Include meta tag to ensure proper rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,16 +20,14 @@
 
     <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/rss_reader.js"></script>
 
     <script src="js/appCtrl.js"></script>
 
     </head>
 
   <body>
-    <div ng-app="mobutv-lab-2-app" ng-controller="appCtrl">
-      <h1> Items </h1>
-      <!-- <div ng-repeat="item in getItems()">{{item}}</div> -->
-      <!-- {{ rssObjects }} -->
-    </div>
+    <h1> Items </h1>
+      <div id="articlesContainer"></div>
   </body>
 </html>

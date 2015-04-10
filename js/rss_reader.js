@@ -1,21 +1,51 @@
-// google.load("feeds", "1");
-// function initialize() {
-//     var feed = new google.feeds.Feed('http://www.rendip.com/rss');
-//     feed.setResultFormat(google.feeds.Feed.MIXED_FORMAT);
-//     feed.setNumEntries(5);
-//     feed.load(function(result) {
-//     if (!result.error) {
-//       for (var i = 0; i < result.feed.entries.length; i++) {
-//         var entry = result.feed.entries[i];
-//         var mediaEntries = entry.xmlNode.getElementsByTagNameNS('*','thumbnail');
-//         for (var j = 0; j < mediaEntries.length; j++) {
-//             var mediaEntry = mediaEntries[j];
-//             var mediaThumbnailUrl = mediaEntry.attributes.getNamedItem('url').value
-//             console.log(mediaThumbnailUrl);
-//         }
-//       }
-//       console.log(result.feed);
-//     }
-//   });
-// }
-// google.setOnLoadCallback(initialize);
+google.load("feeds", "1");
+function initialize() {
+    var feed = new google.feeds.Feed('http://www.rendip.com/rss');
+    feed.setResultFormat(google.feeds.Feed.MIXED_FORMAT);
+    feed.setNumEntries(5);
+    feed.load(function(result) {
+    if (!result.error) {
+    	var articleImages = [];
+
+		for (var i = 0; i < result.feed.entries.length; i++) {
+			var entry = result.feed.entries[i];
+			var mediaEntries = entry.xmlNode.getElementsByTagNameNS('*','thumbnail');
+			// var articleImages = [];
+			for (var j = 0; j < mediaEntries.length; j++) {
+				var mediaEntry = mediaEntries[j];
+				var mediaThumbnailUrl = mediaEntry.attributes.getNamedItem('url').value;
+				// console.log(mediaThumbnailUrl);
+				articleImages.push(mediaThumbnailUrl);
+				}
+			}
+			// console.log(mediaThumbnailUrl);
+			// console.log(result.feed.entries.length);
+			var articles = [];
+			for(var k = 0; k< result.feed.entries.length; k++){
+				articles.push({"article":result.feed.entries[k],"image":articleImages[k]});
+
+			}
+			console.log(articles);
+			var toBePrinted = "";
+
+			for(article in articles){
+				toBePrinted += "<div class='articleRow'>";
+				toBePrinted += "<img src='"+articles[article].image+"'/>";
+				toBePrinted += "<a href='"+articles[article].article.link+"'>";
+				toBePrinted += "<h4 class='articleHeadline'>"+articles[article].article.title+"</h4>";
+				toBePrinted += "</a>";
+				toBePrinted += "</div>";
+			}
+
+	      // console.log(articleImages);
+      // var feedObjects = result.feed.entries;
+      // var toBePrinted = "";
+      // for(object in feedObjects){
+      	// toBePrinted += "<h4>"+feedObjects[object].title+"</h4>";
+      	// console.log(feedObjects[object]);
+      // }
+      document.getElementById('articlesContainer').innerHTML = toBePrinted;
+    	}
+  	});
+}
+google.setOnLoadCallback(initialize);
