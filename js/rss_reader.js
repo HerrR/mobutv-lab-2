@@ -29,11 +29,13 @@ function initialize() {
 			var toBePrinted = "";
 
 			for(article in articles){
-				toBePrinted += "<div class='articleRow'>";
-				toBePrinted += "<img src='"+articles[article].image+"'/>";
+				toBePrinted += "<div class='row articleRow'>";
+				toBePrinted += "<div class='background-image' style='background-image:url("+articles[article].image+")'></div>";
+				toBePrinted += "<div class='content'>";
 				toBePrinted += "<a href='"+articles[article].article.link+"'>";
 				toBePrinted += "<h4 class='articleHeadline'>"+articles[article].article.title+"</h4>";
 				toBePrinted += "</a>";
+				toBePrinted += "</div>";
 				toBePrinted += "</div>";
 			}
 
