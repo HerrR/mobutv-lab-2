@@ -19,12 +19,30 @@
 
     <!-- Include the jQuery Mobile library -->
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/appCtrl.js"></script>
     <script src="js/rss_reader.js"></script>
-
-    </head>
+  </head>
 
   <body>
-    <center><h1>Suck My App <small>News</small></h1></center>
-      <div id="articlesContainer"></div>
+    <div data-role="page" id="feed">
+      <div data-role="header">
+        <center><h2>Suck My App <small>Newsfeed</small></h2></center>
+      </div>
+      <div data-role="content">
+        <div id="articlesContainer"></div>
+      </div>
+    </div>
+
+    <div data-role="page" id="article">
+      <div data-role="header">
+        <center><h2>Suck My App <small>Article</small></h2></center>
+      </div>
+      <div data-role="content">
+        <div id="singleArticleContainer">
+          <a href="#feed" data-transition="flip"><button data-icon="arrow-l">Back to feed</button></a>
+        </div>
+        
+      </div>
+    </div>
   </body>
 </html>

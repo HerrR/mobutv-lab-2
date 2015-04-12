@@ -1,34 +1,18 @@
-var app = angular.module('mobutv-lab-2-app', []);
-	app.controller('appCtrl', function($scope) {
+var articles = [];
 
-		$scope.getItems = function(){
-			return $scope.rssObjects;
-		}
+var selectArticle =function(article){
+	var selectedArticle = articles[article];
+	var output = "";
+	output += "<img src='"+selectedArticle.image+"'>";
+	output += "<h4>"+selectedArticle.article.title+"</h4>";
+	output += "<div class='ui-grid-a'>";
+	output += "<div class='ui-block-a'><a href='#feed' data-transition='flip'><button class='ui-btn'>Back to feed</button></a></div>";
+	output += "<div class='ui-block-b'><a href='"+selectedArticle.article.link+"' data-transition='flip'><button class='ui-btn'>Read original</button></a></div>";
+	output += "</div>";
 
-		// google.load("feeds", "1");
-		var initialize = function() {
-		    var feed = new google.feeds.Feed('http://www.rendip.com/rss');
-		    feed.setResultFormat(google.feeds.Feed.MIXED_FORMAT);
-		    feed.setNumEntries(5);
-		    feed.load(function(result) {
-		    if (!result.error) {
-		      for (var i = 0; i < result.feed.entries.length; i++) {
-		        var entry = result.feed.entries[i];
-		        var mediaEntries = entry.xmlNode.getElementsByTagNameNS('*','thumbnail');
-		        for (var j = 0; j < mediaEntries.length; j++) {
-		            var mediaEntry = mediaEntries[j];
-		            var mediaThumbnailUrl = mediaEntry.attributes.getNamedItem('url').value
-		            // console.log(mediaThumbnailUrl);
-		        }
-		      }
-		      console.log(result.feed.entries);
-		      // $scope.rssObjects = result.feed.entries;
-		      // console.log($scope.rssObjects);
-		    }
-		  });
-		}
+	document.getElementById("singleArticleContainer").innerHTML = output;
+}
 
-
-
-		// google.setOnLoadCallback(initialize);
-	});
+var addArticle = function(article){
+	articles.push(article);
+}
