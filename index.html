@@ -29,6 +29,11 @@
         <center><h2>Suck My App <small>Newsfeed</small></h2></center>
       </div>
       <div data-role="content">
+        <select onChange="updateFeed(this.value)">
+          <option value="*"> All articles </option>
+          <option value="Business"> Business </option>
+          <option value="Food"> Food </option>
+        </select>
         <div id="articlesContainer"></div>
       </div>
     </div>
