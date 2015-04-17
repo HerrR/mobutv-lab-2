@@ -15,25 +15,28 @@ var selectArticle =function(article){
 var updateFeed = function(filter){
 	var output = "";
 	for(article in articles){
-		var outputRow = "";
-		outputRow += "<a href='#article' data-transition='flip' onclick='selectArticle("+article+")'>";
-		outputRow += "<div class='row articleRow'>";
-		outputRow += "<div class='background-image' style='background-image:url("+articles[article].image+")'></div>";
-		outputRow += "<div class='content'>";
-
-		outputRow += "<h4 class='articleHeadline'>"+articles[article].article.title+"</h4>";
-		
-		outputRow += "</div>";
-		outputRow += "</div>";
-		outputRow += "</a>";
-		
 		if(filter === "*"){
+			outputRow = createArticle(article);
 			output += outputRow;
 		} else if($.inArray(filter,articles[article].article.categories) > -1){
+			outputRow = createArticle(article);
 			output += outputRow;
 		}
 	}
 	document.getElementById('articlesContainer').innerHTML = output;
+}
+
+var createArticle = function(article){
+	var outputRow = "";
+	outputRow += "<a href='#article' data-transition='flip' onclick='selectArticle("+article+")'>";
+	outputRow += "<div class='row articleRow'>";
+	outputRow += "<div class='background-image' style='background-image:url("+articles[article].image+")'></div>";
+	outputRow += "<div class='content'>";
+	outputRow += "<h4 class='articleHeadline'>"+articles[article].article.title+"</h4>";
+	outputRow += "</div>";
+	outputRow += "</div>";
+	outputRow += "</a>";
+	return outputRow;
 }
 
 var addArticle = function(article){
